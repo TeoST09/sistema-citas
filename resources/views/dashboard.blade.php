@@ -1,0 +1,14 @@
+@extends('layouts.app')
+
+@section('title', 'Dashboard')
+
+@section('content')
+
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit">
+        Cerrar Sesión
+    </button>
+</form>
+
+@endsection
