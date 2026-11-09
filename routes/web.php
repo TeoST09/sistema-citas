@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MascotasController;
+use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\ServiciosAdminController;
+use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +29,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/settings', [UserController::class, 'edit'])->name('settings');
+    Route::put('/settings', [UserController::class, 'update'])->name('settings.update');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('mascotas', MascotasController::class);
+    Route::resource('servicios_admin', ServiciosAdminController::class)->middleware('role');
+    Route::resource('/servicios', ServiciosController::class);
+    Route::resource('/reservas', ReservasController::class);
 });

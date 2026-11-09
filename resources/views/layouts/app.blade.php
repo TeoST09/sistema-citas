@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/veterinaria.png') }}">
 
     <title>@yield('title', 'Pet')</title>
 
@@ -23,7 +22,7 @@
                     </span>
                 </button>
                 <a href="{{ route('dashboard') }}" aria-label="PawlinaPet" class="navbar-brand navbar-brand-autodark me-3">
-                    <img src="{{ asset('favicon.svg') }}" alt="PawlinaPet" height="32" class="navbar-brand-image">
+                    <img src="{{ asset('images/veterinaria.png') }}" alt="PawlinaPet" height="40" class="navbar-brand-image">
                 </a>
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="navbar-nav">
@@ -37,7 +36,7 @@
                                     </svg>
                                 </span>
                                 <span class="nav-link-title">
-                                    Home
+                                    Inicio
                                 </span>
                             </a>
                         </li>
@@ -49,26 +48,42 @@
                                 <span class="nav-link-title">Mascotas</span>
                             </a>
                         </li>
+                        @if(auth()->user()->role_id >= 2)
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('servicios.index') }}">
+                                <span class="nav-link-icon"><span aria-hidden="true">🩺</span></span>
+                                <span class="nav-link-title">Servicios</span>
+                            </a>
+                        </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('reservas.index') }}">
+                                <span class="nav-link-icon"><span aria-hidden="true">📅</span></span>
+                                <span class="nav-link-title">Reservas</span>
+                            </a>
+                        </li>
+                        @if(auth()->user()->role_id >= 2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('servicios_admin.index') }}">
                                 <span class="nav-link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="icon">
-                                        <path d="M9 11l3 3l8 -8" />
-                                        <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M12 8v8" />
+                                        <path d="M8 12h8" />
                                     </svg>
                                 </span>
                                 <span class="nav-link-title">
-                                    Settings
+                                    Panel - Servicios
                                 </span>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="navbar-nav flex-row order-md-last ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <span class="avatar avatar-sm" style="background-image: url(/static/avatars/044m.jpg)">
-                            </span>
+                            <img src="{{ asset('images/veterinaria.png') }}" alt="Imagen de perfil" class="avatar avatar-sm" style="object-fit: cover;">
                             <div class="d-none d-xl-block ps-2">
                                 <div>
                                     {{ auth()->user()->name}}
@@ -85,20 +100,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a href="#" class="dropdown-item">
-                                Status
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                Profile
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                Feedback
-                            </a>
-                            <div class="dropdown-divider">
-                            </div>
-                            <a href="#" class="dropdown-item">
-                                Settings
-                            </a>
+                            <a href="{{ route('settings') }}" class="dropdown-item">Configuración</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item">
@@ -115,7 +117,7 @@
             <header class="navbar navbar-expand-md d-print-none">
                 <div class="container-xl">
                     <a href="{{ url('/') }}" aria-label="PawlinaPet" class="navbar-brand navbar-brand-autodark">
-                        <img src="{{ asset('favicon.svg') }}" alt="PawlinaPet" height="32" class="navbar-brand-image">
+                        <img src="{{ asset('images/veterinaria.png') }}" alt="PawlinaPet" height="40" class="navbar-brand-image">
                     </a>
                     <div class="navbar-nav flex-row ms-auto gap-2">
                         <a href="{{ route('login') }}" class="btn btn-outline-primary">Iniciar sesión</a>
