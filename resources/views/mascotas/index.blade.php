@@ -14,12 +14,42 @@
         <form action="{{ route('mascotas.index') }}" method="GET" class="card mb-4">
             <div class="card-body">
                 <div class="row g-3 align-items-end">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="buscar" class="form-label">Buscar por nombre de mascota o usuario</label>
-                        <input type="search" class="form-control" id="buscar" name="buscar" value="{{ $buscar ?? null }}" placeholder="Escribe un nombre">
+                        <input type="search" class="form-control" id="buscar" name="buscar" value="{{ request('buscar') }}" placeholder="Escribe un nombre">
                     </div>
-                    <div class="col-md-2 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    <div class="col-md-3">
+                        <label for="raza_id" class="form-label">Raza</label>
+                        <select class="form-select" id="raza_id" name="raza_id">
+                            <option value="">Todas las razas</option>
+                            @foreach($razas as $raza)
+                                <option value="{{ $raza->id }}" {{ request('raza_id') == $raza->id ? 'selected' : '' }}>
+                                    {{ $raza->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="especie_id" class="form-label">Especie</label>
+                        <select class="form-select" id="especie_id" name="especie_id">
+                            <option value="">Todas las especies</option>
+                            @foreach($especies as $especie)
+                                <option value="{{ $especie->id }}" {{ request('especie_id') == $especie->id ? 'selected' : '' }}>
+                                    {{ $especie->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="sexo" class="form-label">Sexo</label>
+                        <select class="form-select" id="sexo" name="sexo">
+                            <option value="">Todos</option>
+                            <option value="Macho" {{ request('sexo') === 'Macho' ? 'selected' : '' }}>Macho</option>
+                            <option value="Hembra" {{ request('sexo') === 'Hembra' ? 'selected' : '' }}>Hembra</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Buscar y filtrar</button>
                         <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Limpiar</a>
                     </div>
                 </div>

@@ -4,8 +4,20 @@
 @section('title', 'Inicio')
 
 @section('content')
-
-    <h1 class="text-center">Bienvenido al sistema de gestión de citas</h1>
-
-
+    <div class="container-xl">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center p-4 p-md-5">
+                <img
+                    src="{{ asset('images/veterinaria.png') }}"
+                    alt="PawlinaPet"
+                    class="img-fluid mb-4"
+                    style="max-width: 220px;"
+                >
+                <h1 class="mb-3">Bienvenido a PawlinaPet</h1>
+                <p class="lead text-secondary mb-0">
+                
+                </p>
+            </div>
+        </div>
+    </div>
 @endsection

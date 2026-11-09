@@ -15,12 +15,43 @@ class MascotasController extends Controller
      */
 public function index(Request $request)
 {
+    $validated = $request->validate([
+        'buscar' => ['nullable', 'string', 'max:255'],
+        'raza_id' => ['nullable', 'integer', 'exists:razas,id'],
+        'especie_id' => ['nullable', 'integer', 'exists:especies,id'],
+        'sexo' => ['nullable', 'in:Macho,Hembra'],
+    ]);
 
-    $usuarios = user::where('role_id', 1)->get();
-    $mascotas = mascotas::with('raza')->get();
-    $mi_pets = mascotas::where('user_id', auth()->user()->id)->with(['raza', 'especie', 'usuario'])->get();
+    $consulta = mascotas::with(['raza', 'especie', 'usuario']);
 
-    return view('mascotas.index', compact('mascotas','mi_pets','usuarios'));
+    if (!empty($validated['buscar'])) {
+        $consulta->where(function ($query) {
+            $query->where('nombre', 'like', '%'.request('buscar').'%')
+                ->orWhereHas('usuario', function ($query) {
+                    $query->where('name', 'like', '%'.request('buscar').'%');
+                });
+        });
+    }
+
+    if (!empty($validated['raza_id'])) {
+        $consulta->where('raza_id', $validated['raza_id']);
+    }
+
+    if (!empty($validated['especie_id'])) {
+        $consulta->where('especie_id', $validated['especie_id']);
+    }
+
+    if (!empty($validated['sexo'])) {
+        $consulta->where('sexo', $validated['sexo']);
+    }
+
+    $mascotas = $consulta->get();
+    $mi_pets = $mascotas->where('user_id', auth()->id());
+    $usuarios = User::where('role_id', 1)->get();
+    $razas = Razas::orderBy('nombre')->get();
+    $especies = Especies::orderBy('nombre')->get();
+
+    return view('mascotas.index', compact('mascotas', 'mi_pets', 'usuarios', 'razas', 'especies'));
 }
 
 
