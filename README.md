@@ -1,58 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PawlinaPet
+
+Sistema web para la gestión de una clínica veterinaria. PawlinaPet reúne en un solo lugar la administración de mascotas, servicios, reservas y cuentas de usuario, con roles para clientes, veterinarios y administradores.
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white">
+  <img alt="PHP 8.3+" src="https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white">
+  <img alt="MySQL" src="https://img.shields.io/badge/MySQL-database-4479A1?logo=mysql&logoColor=white">
+  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-ES_modules-F7DF1E?logo=javascript&logoColor=black">
+  <img alt="Bootstrap" src="https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white">
+  <img alt="Tabler" src="https://img.shields.io/badge/UI-Tabler-206BC4">
 </p>
 
-## About Laravel
+> **Interfaz:** las páginas se renderizan con Laravel Blade, HTML y CSS.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Funcionalidades
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Registro e inicio de sesión.
+- Gestión de mascotas, especies y razas.
+- Consulta de servicios veterinarios.
+- Creación y administración de reservas.
+- Paneles para administrar servicios y usuarios.
+- Roles de usuario, veterinario y administrador.
+- Configuración de cuenta y actualización de contraseña.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologías
 
-## Learning Laravel
+- **Backend:** PHP 8.3+ y Laravel 13.
+- **Vistas:** Blade, HTML y CSS.
+- **Frontend:** JavaScript con módulos ES.
+- **Estilos y componentes:** Bootstrap y Tabler.
+- **Base de datos:** MySQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Requisitos
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.3 o superior y Composer.
+- Node.js y npm.
+- MySQL instalado y ejecutándose.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Instalación
 
-## Agentic Development
+1. Clona el repositorio y entra en el proyecto:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+   ```bash
+   git clone <https://github.com/TeoST09/sistema-citas>
+   cd sistema-citas
+   ```
+
+2. Instala las dependencias:
+
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. Configura el entorno:
+
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+   En Windows PowerShell, usa `Copy-Item .env.example .env` en lugar de `cp`.
+
+4. Crea una base de datos MySQL y actualiza las variables de conexión en `.env`:
+
+   ```dotenv
+   APP_NAME=PawlinaPet
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=pet
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+5. Ejecuta las migraciones y carga los datos iniciales:
+
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. Inicia el servidor de desarrollo y Vite en terminales separadas:
+
+   ```bash
+   php artisan serve
+   ```
+
+   ```bash
+   npm run dev
+   ```
+
+   Abre la URL que muestra Artisan, normalmente `http://127.0.0.1:8000`.
+
+Para generar los recursos de frontend para producción:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Pruebas
 
-## Contributing
+```bash
+php artisan test
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Estructura principal
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```text
+app/
+  Http/Controllers/   Controladores de autenticación y módulos
+  Models/             Modelos de la aplicación
+database/
+  migrations/         Estructura de la base de datos
+  seeders/            Roles y datos iniciales
+resources/
+  views/              Vistas Blade
+  css/                Estilos
+  js/                 JavaScript de la aplicación
+routes/
+  web.php             Rutas web
+```
