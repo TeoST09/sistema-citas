@@ -15,14 +15,14 @@ class ReservasController extends Controller
         $usuario = auth()->user();
         $esAdmin = (int) $usuario->role_id >= 2;
 
-        $todas = reservas::all();
+        $todas = Reservas::all();
         
         $validated = $request->validate([
             'estado' => ['nullable', 'in:confirmada,pendiente,cancelada'],
         ]);
 
 
-        $estado = reservas::query();
+        $estado = Reservas::query();
 
         if (!empty($validated['estado'])) {
             $estado->where('estado', $validated['estado']);
@@ -165,7 +165,7 @@ class ReservasController extends Controller
     }
 
     public function destroy($id){
-        $eliminar = reservas::where('id', $id)->first();
+        $eliminar = Reservas::where('id', $id)->first();
         if ($eliminar) {
             $eliminar->delete();
             return redirect()->route('reservas.index')->with('success', 'Servicio eliminada exitosamente.');

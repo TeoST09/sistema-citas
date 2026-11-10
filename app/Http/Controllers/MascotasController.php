@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\mascotas;
+use App\Models\Mascotas;
 use App\Models\User;
 use App\Models\Especies;
 use App\Models\Razas;
@@ -22,7 +22,7 @@ public function index(Request $request)
         'sexo' => ['nullable', 'in:Macho,Hembra'],
     ]);
 
-    $consulta = mascotas::with(['raza', 'especie', 'usuario']);
+    $consulta = Mascotas::with(['raza', 'especie', 'usuario']);
 
     if (!empty($validated['buscar'])) {
         $consulta->where(function ($query) {
@@ -60,9 +60,9 @@ public function index(Request $request)
      */
     public function create()
     {
-        $usuario = user::where('role_id', 1)->get();
-        $especie = especies::all();
-        $raza = razas::all();
+        $usuario = User::where('role_id', 1)->get();
+        $especie = Especies::all();
+        $raza = Razas::all();
         return view('mascotas.create', compact('usuario', 'especie', 'raza'));
     }
 
@@ -84,7 +84,7 @@ public function index(Request $request)
 
 
 
-        $mascota = new mascotas();
+        $mascota = new Mascotas();
         $mascota->nombre = $request->input('nombre');
         $mascota->fecha_nacimiento = $request->input('fecha_nacimiento');
         $mascota->sexo = $request->input('sexo');
@@ -103,7 +103,7 @@ public function index(Request $request)
      */
     public function show($id)
     {
-        $mascota = mascotas::findOrFail($id);
+        $mascota = Mascotas::findOrFail($id);
         $especie = Especies::find($mascota->especie_id);
         $raza = Razas::find($mascota->raza_id);
         $user= User::find($mascota->user_id);
@@ -116,11 +116,11 @@ public function index(Request $request)
      */
     public function edit($id)
     {
-       $mascota = mascotas::findOrFail($id);
+       $mascota = Mascotas::findOrFail($id);
     
-        $usuario = user::where('role_id', 1)->get();
-        $especie = especies::all();
-        $raza = razas::all();
+        $usuario = User::where('role_id', 1)->get();
+        $especie = Especies::all();
+        $raza = Razas::all();
 
         return view('mascotas.edit', compact('mascota', 'usuario', 'especie', 'raza'));
 
@@ -142,7 +142,7 @@ public function index(Request $request)
             'raza_id' => 'nullable|integer|exists:razas,id',
         ]);
 
-        $mascota = mascotas::findOrFail($id);
+        $mascota = Mascotas::findOrFail($id);
 
         $mascota->nombre = $request->input('nombre');
         $mascota->fecha_nacimiento = $request->input('fecha_nacimiento');
@@ -166,7 +166,7 @@ public function index(Request $request)
      */
     public function destroy(Request $request, $id)
     {
-        $eliminar = mascotas::where('id', $id)->first();
+        $eliminar = Mascotas::where('id', $id)->first();
         if ($eliminar) {
             $eliminar->delete();
             return redirect()->route('mascotas.index')->with('success', 'Mascota eliminada exitosamente.');
