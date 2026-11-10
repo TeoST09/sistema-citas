@@ -29,11 +29,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/settings', [UserController::class, 'edit'])->name('settings');
-    Route::put('/settings', [UserController::class, 'update'])->name('settings.update');
+    Route::get('/settings', [UserController::class, 'editSettings'])->name('settings');
+    Route::put('/settings', [UserController::class, 'updateSettings'])->name('settings.update');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('mascotas', MascotasController::class);
     Route::resource('servicios_admin', ServiciosAdminController::class)->middleware('role');
     Route::resource('/servicios', ServiciosController::class);
     Route::resource('/reservas', ReservasController::class);
+    Route::resource('/usuarios', UserController::class);
 });

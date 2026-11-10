@@ -48,14 +48,12 @@
                                 <span class="nav-link-title">Mascotas</span>
                             </a>
                         </li>
-                        @if(auth()->user()->role_id >= 2)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('servicios.index') }}">
                                 <span class="nav-link-icon"><span aria-hidden="true">🩺</span></span>
                                 <span class="nav-link-title">Servicios</span>
                             </a>
                         </li>
-                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('reservas.index') }}">
                                 <span class="nav-link-icon"><span aria-hidden="true">📅</span></span>
@@ -75,6 +73,14 @@
                                 <span class="nav-link-title">
                                     Panel - Servicios
                                 </span>
+                            </a>
+                        </li>
+                        @endif
+                        @if(auth()->user()->role_id == 3)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('usuarios.index') }}">
+                                <span class="nav-link-icon"><span aria-hidden="true">👥</span></span>
+                                <span class="nav-link-title">Usuarios</span>
                             </a>
                         </li>
                         @endif
