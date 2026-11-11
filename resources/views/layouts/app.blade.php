@@ -83,6 +83,12 @@
                                 <span class="nav-link-title">Especies</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('razas.index') }}">
+                                <span class="nav-link-icon"><span aria-hidden="true">🐕</span></span>
+                                <span class="nav-link-title">Razas</span>
+                            </a>
+                        </li>
                         @endif
                         @if(auth()->user()->role_id == 3)
                         <li class="nav-item">
