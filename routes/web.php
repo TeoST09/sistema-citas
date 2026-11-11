@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\ServiciosAdminController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EspeciesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,4 +38,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/servicios', ServiciosController::class);
     Route::resource('/reservas', ReservasController::class);
     Route::resource('/usuarios', UserController::class);
+    Route::resource('/especies', EspeciesController::class)->middleware('role');
 });

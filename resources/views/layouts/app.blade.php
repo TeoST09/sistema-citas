@@ -76,6 +76,14 @@
                             </a>
                         </li>
                         @endif
+                        @if(auth()->user()->role_id >= 2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('especies.index') }}">
+                                <span class="nav-link-icon"><span aria-hidden="true">🐾</span></span>
+                                <span class="nav-link-title">Especies</span>
+                            </a>
+                        </li>
+                        @endif
                         @if(auth()->user()->role_id == 3)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('usuarios.index') }}">
